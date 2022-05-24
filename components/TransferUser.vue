@@ -10,22 +10,26 @@
             :counter="10"
             v-model="name"
             required
+            clearable
           ></v-text-field>
           <v-text-field
             label="Qual a sua agencia?"
             :counter="10"
             required
+            clearable
             v-model="agencie"
           ></v-text-field>
           <v-text-field
             label="Numero de conta"
             :counter="10"
             required
+            clearable
             v-model="numberAccount"
           ></v-text-field>
           <v-text-field
             label="Quantia a transferir"
             required
+            clearable
             v-model="sale"
           ></v-text-field>
         </v-form>

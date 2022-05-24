@@ -11,6 +11,7 @@
                 :label="
                   'Valor para ' + currentStep == 2 ? 'Sacar' : 'Depositar'
                 "
+                clearable
               ></v-text-field>
             </v-form>
           </v-col>
