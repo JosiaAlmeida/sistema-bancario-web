@@ -37,11 +37,6 @@
 
 <script>
 import { Account } from "@/repository/account";
-const pattern = /^[0-9]+/;
-const patternString = /^[0-9]+[a-zA-Z]+/g;
-const patternStringNumber = /^[a-zA-Z]+[0-9]+/g;
-const patternStringNumberString = /^[a-zA-Z]+[0-9]+[a-zA-Z]+/g;
-const patternStringTwoNumber = /^[0-9]+[a-zA-Z]+[0-9]+/g;
 export default {
   name: "IndexPage",
   data() {
@@ -62,17 +57,9 @@ export default {
         name &&
         agency &&
         numberAccount &&
-        pattern.test(numberAccount) &&
-        !patternStringNumberString.test(numberAccount) &&
-        !patternString.test(numberAccount) &&
-        !patternStringNumber.test(numberAccount) &&
-        !patternStringTwoNumber.test(numberAccount) &&
+        this.validateString(numberAccount) &&
         sale &&
-        pattern.test(sale) &&
-        !patternStringNumberString.test(sale) &&
-        !patternString.test(sale) &&
-        !patternStringNumber.test(sale) &&
-        !patternStringTwoNumber.test(sale)
+        this.validateString(sale)
       ) {
         this.close(true, "Sua conta foi criada");
         this.step++;
@@ -97,17 +84,9 @@ export default {
         name &&
         agency &&
         numberAccount &&
-        pattern.test(numberAccount) &&
-        !patternStringNumberString.test(numberAccount) &&
-        !patternString.test(numberAccount) &&
-        !patternStringNumber.test(numberAccount) &&
-        !patternStringTwoNumber.test(numberAccount) &&
+        this.validateString(numberAccount) &&
         sale &&
-        pattern.test(sale) &&
-        !patternStringNumberString.test(sale) &&
-        !patternString.test(sale) &&
-        !patternStringNumber.test(sale) &&
-        !patternStringTwoNumber.test(sale)
+        this.validateString(sale)
       ) {
         this.UsersTransfer.push(new Account(name, agency, numberAccount, 0));
         this.User.transfer(
@@ -121,6 +100,22 @@ export default {
     close(value, text) {
       this.snackBar = value;
       this.textInfo = text;
+    },
+    validateString(value) {
+      const pattern = /^[0-9]+/;
+      const patternString = /^[0-9]+[a-zA-Z]+/g;
+      const patternStringNumber = /^[a-zA-Z]+[0-9]+/g;
+      const patternStringNumberString = /^[a-zA-Z]+[0-9]+[a-zA-Z]+/g;
+      const patternStringTwoNumber = /^[0-9]+[a-zA-Z]+[0-9]+/g;
+      if (
+        pattern.test(value) &&
+        !patternStringNumberString.test(value) &&
+        !patternString.test(value) &&
+        !patternStringNumber.test(value) &&
+        !patternStringTwoNumber.test(value)
+      )
+        return true;
+      else return false;
     },
   },
   beforeUpdate() {
