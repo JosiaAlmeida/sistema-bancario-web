@@ -8,9 +8,7 @@
             <v-form>
               <v-text-field
                 v-model="value"
-                :label="
-                  'Valor para ' + currentStep == 2 ? 'Sacar' : 'Depositar'
-                "
+                :label="currentStep == 2 ? 'Sacar' : 'Depositar'"
                 clearable
               ></v-text-field>
             </v-form>
@@ -18,7 +16,7 @@
         </v-row>
       </v-card-text>
       <v-card-actions>
-        <v-btn @click="sacarOrDepositar(value)">{{
+        <v-btn @click="withdrawOrDeposit(value)">{{
           currentStep == 2 ? "Sacar" : "Depositar"
         }}</v-btn>
         <v-btn @click="profile(1)">Perfil</v-btn>
@@ -37,7 +35,7 @@ export default {
   props: {
     ["sale"]: Number,
     ["currentStep"]: Number,
-    ["sacarOrDepositar"]: Function,
+    ["withdrawOrDeposit"]: Function,
     ["profile"]: Function,
   },
   watch: {

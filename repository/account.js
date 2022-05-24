@@ -2,28 +2,28 @@ class Account {
   name
   numberAccount
   sale
-  agencie
-  constructor(name, agencie, numberAccount, sale) {
+  agency
+  constructor(name, agency, numberAccount, sale) {
     this.name = name
-    this.agencie = agencie
+    this.agency = agency
     this.numberAccount = numberAccount
     this.sale = sale
   }
 
-  sacar(value) {
+  withdraw(value) {
     if (this.sale >= value) {
       this.sale -= value
       return true
     }
     return false
   }
-  depositar(value) {
+  deposit(value) {
     this.sale = Number(this.sale) + Number(value)
     return true
   }
-  transferir(value, Account) {
-    if (this.sacar(value)) {
-      Account.depositar(value)
+  transfer(value, Account) {
+    if (this.withdraw(value)) {
+      Account.deposit(value)
       return true
     }
     return false

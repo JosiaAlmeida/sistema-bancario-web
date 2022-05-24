@@ -30,6 +30,7 @@
             required
             minlength="10"
             maxlength="14"
+            pattern="[0-9]+"
             :counter="14"
             v-model="numberAccount"
             :rules="[rules.required, rules.validateNumber]"
@@ -42,17 +43,15 @@
             clearable
             :rules="[rules.required, rules.validateNumber]"
           ></v-text-field>
+          <v-btn
+            depressed
+            color="primary"
+            @click="handleClick(name, agencie, numberAccount, sale)"
+          >
+            Criar conta
+          </v-btn>
         </v-form>
       </v-card-text>
-      <v-card-actions>
-        <v-btn
-          depressed
-          color="primary"
-          @click="handleClick(name, agencie, numberAccount, sale)"
-        >
-          Criar conta
-        </v-btn>
-      </v-card-actions>
     </v-card>
   </v-col>
 </template>
@@ -74,7 +73,7 @@ export default {
   methods: {
     validateNumberInput: (value) => {
       const pattern = /^[0-9]+$/;
-      return pattern.test(value) || "Não pode conter caractear";
+      return pattern.test(value) || "Não pode conter caracter";
     },
   },
   props: {

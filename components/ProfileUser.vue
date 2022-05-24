@@ -3,14 +3,14 @@
     <v-card>
       <v-card-title> Bem vindo {{ name }} </v-card-title>
       <v-card-text>
-        <p>Agencia: {{ agencie }}</p>
+        <p>Agencia: {{ agency }}</p>
         <p>Numero de conta: {{ number }}</p>
         <p>Saldo disponivel: {{ sale }}</p>
       </v-card-text>
       <v-card-actions>
-        <v-btn @click="opeSacar(2)"> Sacar saldo </v-btn>
-        <v-btn @click="opeDepositar(3)"> depositar saldo </v-btn>
-        <v-btn @click="opeTransfer(4)"> Transferir saldo </v-btn>
+        <v-btn @click="oWithdraw(2)"> Sacar saldo </v-btn>
+        <v-btn @click="oDeposit(3)"> depositar saldo </v-btn>
+        <v-btn @click="oTransfer(4)"> Transferir saldo </v-btn>
         <v-btn @click="opeExtrato(5)"> Imprimir extrato </v-btn>
       </v-card-actions>
     </v-card>
@@ -22,11 +22,11 @@ export default {
   props: {
     ["name"]: String,
     ["number"]: Number,
-    ["agencie"]: String,
+    ["agency"]: String,
     ["sale"]: Number,
-    ["opeSacar"]: Function,
-    ["opeDepositar"]: Function,
-    ["opeTransfer"]: Function,
+    ["oWithdraw"]: Function,
+    ["oDeposit"]: Function,
+    ["oTransfer"]: Function,
     ["opeExtrato"]: Function,
   },
 };
