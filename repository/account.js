@@ -11,18 +11,22 @@ class Account {
   }
 
   sacar(value) {
-    if (this.sale >= value)
+    if (this.sale >= value) {
       this.sale -= value
+      return true
+    }
+    return false
   }
   depositar(value) {
     this.sale = Number(this.sale) + Number(value)
+    return true
   }
   transferir(value, Account) {
-    this.sale -= value
-    Account.depositar(value)
-  }
-  ImprimirExtracto() {
-    return "*******EXTRATO***********\nAgencia: " + this.agencie + "\nNumero: " + this.numberAccount + "\nSaldo: " + this.sale
+    if (this.sacar(value)) {
+      Account.depositar(value)
+      return true
+    }
+    return false
   }
 }
 module.exports = { Account }

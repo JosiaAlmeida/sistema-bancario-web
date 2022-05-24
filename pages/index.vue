@@ -19,6 +19,18 @@
       :sacarOrDepositar="sacarOrDepositar"
       :sale="Number(User.sale)"
     />
+    <TransferUser
+      v-if="step == 4"
+      :Mysale="Number(User.sale)"
+      :handleClick="transferSaleToUser"
+      :profile="operation"
+    />
+    <BankExtract
+      v-if="step == 5"
+      :User="User"
+      :profile="operation"
+      :totalTransfer="UsersTransfer.length"
+    />
     <!-- <SnackBars :snackbar="snackbar" :text="text[step - 1]" /> -->
   </v-row>
 </template>
@@ -29,22 +41,37 @@ import ProfileUser from "../components/ProfileUser.vue";
 import SnackBars from "~/components/SnackBars.vue";
 import { Account } from "@/repository/account";
 import SacarSale from "~/components/SacarSale.vue";
+import TransferUser from "~/components/TransferUser.vue";
+import BankExtract from "../components/BankExtract.vue";
 
 export default {
   name: "IndexPage",
-  components: { CreateUser, ProfileUser, SnackBars, SacarSale },
+  components: {
+    CreateUser,
+    ProfileUser,
+    SnackBars,
+    SacarSale,
+    TransferUser,
+    BankExtract,
+  },
   data() {
     return {
       step: 0,
       snackbar: false,
       text: ["Conta criada com sucesso"],
       User: null,
+      UsersTransfer: [],
     };
+  },
+  computed: {
+    total() {
+      return this.UsersTransfer.sum(({ sale }) => sale);
+    },
   },
   methods: {
     createUser(name, agencie, numberAccount, sale) {
       this.User = new Account(name, agencie, numberAccount, sale);
-      this.step++;
+      if (name && agencie && numberAccount && sale) this.step++;
     },
     operation(v) {
       this.step = v;
@@ -55,6 +82,14 @@ export default {
       } else if (this.step == 3) {
         this.User.depositar(v);
       }
+    },
+    transferSaleToUser(name, agencie, numberAccount, sale) {
+      this.UsersTransfer.push(new Account(name, agencie, numberAccount, 0));
+      this.User.transferir(
+        sale,
+        this.UsersTransfer[this.UsersTransfer.length - 1]
+      );
+      console.log(this.UsersTransfer.reduce(({ sale }) => sale + sale));
     },
   },
 };
