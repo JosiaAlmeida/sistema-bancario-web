@@ -63,11 +63,6 @@ export default {
       UsersTransfer: [],
     };
   },
-  computed: {
-    total() {
-      return this.UsersTransfer.sum(({ sale }) => sale);
-    },
-  },
   methods: {
     createUser(name, agencie, numberAccount, sale) {
       this.User = new Account(name, agencie, numberAccount, sale);
@@ -89,7 +84,6 @@ export default {
         sale,
         this.UsersTransfer[this.UsersTransfer.length - 1]
       );
-      console.log(this.UsersTransfer.reduce(({ sale }) => sale + sale));
     },
   },
 };

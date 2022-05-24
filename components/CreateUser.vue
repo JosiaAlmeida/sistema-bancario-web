@@ -6,31 +6,41 @@
         <v-form>
           <v-text-field
             label="Nome do usuario"
-            :counter="10"
             v-model="name"
             clearable
+            type="text"
             required
+            :counter="10"
+            maxlength="10"
+            :rules="[rules.required]"
           ></v-text-field>
           <v-text-field
             label="Qual a sua agencia?"
-            :counter="10"
             required
+            maxlength="4"
+            :counter="4"
+            type="text"
             v-model="agencie"
             clearable
+            :rules="[rules.required]"
           ></v-text-field>
           <v-text-field
             label="Numero de conta"
-            :counter="10"
             clearable
             required
+            minlength="10"
+            maxlength="14"
+            :counter="14"
             v-model="numberAccount"
+            :rules="[rules.required, rules.validateNumber]"
           ></v-text-field>
           <v-text-field
+            type="text"
             label="Saldo inicial"
-            :counter="10"
             required
             v-model="sale"
             clearable
+            :rules="[rules.required, rules.validateNumber]"
           ></v-text-field>
         </v-form>
       </v-card-text>
@@ -52,10 +62,20 @@ export default {
   data() {
     return {
       name: "",
-      numberAccount: 0,
-      sale: 0,
+      numberAccount: null,
+      sale: null,
       agencie: "",
+      rules: {
+        required: (value) => !!value || "Required.",
+        validateNumber: this.validateNumberInput,
+      },
     };
+  },
+  methods: {
+    validateNumberInput: (value) => {
+      const pattern = /^[0-9]+$/;
+      return pattern.test(value) || "Não pode conter caractear";
+    },
   },
   props: {
     ["handleClick"]: Function,

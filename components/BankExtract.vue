@@ -9,7 +9,6 @@
           Total de transferencia feitas: **********{{ totalTransfer }}**********
         </p>
         <p>Saldo Disponivel: **********{{ User.sale }}**********</p>
-        <p>Montante total Transferido: {{ MoveTotal }}</p>
       </v-card-text>
       <v-card-actions>
         <v-btn @click="profile(1)">Perfil</v-btn>
@@ -24,7 +23,6 @@ export default {
     ["User"]: Object,
     ["totalTransfer"]: Number,
     ["profile"]: Function,
-    ["MoveTotal"]: Number,
   },
 };
 </script>
